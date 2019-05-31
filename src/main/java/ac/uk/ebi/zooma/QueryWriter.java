@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,6 +92,9 @@ public class QueryWriter implements CommandLineRunner {
 
         //utilityService.executeCommand("curl https://raw.githubusercontent.com/EBISPOT/efo/efo2/src/ontology/efo-edit.owl > "+efoOwl);
 
+        try {
+            Files.createDirectories( Paths.get(scatlasFolder +"/results/"));
+        }catch (Exception e){}
 
         /**
          * Exceute Robot Command on Ontology sparql files
@@ -145,8 +150,9 @@ public class QueryWriter implements CommandLineRunner {
                 "   FILTER (regex(?n, \""+ontologyUrl+"_\", \"i\")) .\n" +
                 "   }\n";
 
-
-        utilityService.writeToFile(data, sparqlDir, ontologyUrl+".sparql" );
+        String[] temp = ontologyUrl.split("/");
+        String prefix = temp[temp.length-1];
+        utilityService.writeToFile(data, sparqlDir, prefix+".sparql" );
 
         logger.info("*************** WRITING SPARQL FILE ************ "+ontologyUrl);
 
