@@ -1,0 +1,9 @@
+http://purl.obolibrary.org/obo/FBbt_00004784
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00001768
+http://purl.obolibrary.org/obo/FBbt_00004514
+http://purl.obolibrary.org/obo/FBbt_00005663

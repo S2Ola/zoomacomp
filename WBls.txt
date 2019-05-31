@@ -1,0 +1,2 @@
+http://purl.obolibrary.org/obo/WBls_0000041
+http://purl.obolibrary.org/obo/WBls_0000003
