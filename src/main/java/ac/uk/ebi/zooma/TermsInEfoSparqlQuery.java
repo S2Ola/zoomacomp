@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-
 //@Component
 @Order(value = 2)
 public class TermsInEfoSparqlQuery<OntologyPrefix> implements CommandLineRunner {
@@ -22,7 +21,7 @@ public class TermsInEfoSparqlQuery<OntologyPrefix> implements CommandLineRunner 
     private String homeDir = System.getProperty( "user.home" );
     private Logger logger = LoggerFactory.getLogger( TermsInEfoSparqlQuery.class );
     private String actualOntologyDir = homeDir + "/Documents/ACTUAL_ONTOLOGY/";
-    //private String sparqlDir = homeDir + "/Documents/ACTUAL_ONTOLOGY/Sparql/";
+    private String sparqlDir = homeDir + "/Documents/ACTUAL_ONTOLOGY/Sparql/";
 
 
     @Autowired
@@ -38,7 +37,7 @@ public class TermsInEfoSparqlQuery<OntologyPrefix> implements CommandLineRunner 
 
     public void loadPrefixFile() throws Exception {
 
-        String ontologyPrefix = utilityService.parseFile( actualOntologyDir + "OntologyPrefix.txt" );
+        String ontologyPrefix = utilityService.parseFile( actualOntologyDir + "OntologyUrl.txt" );
 
 
         List <String> prefixes = (Arrays.asList( ontologyPrefix.split( "," ) ));
@@ -57,7 +56,7 @@ public class TermsInEfoSparqlQuery<OntologyPrefix> implements CommandLineRunner 
 
         int count = 0;
 
-        File file = new File( actualOntologyDir + "OntologyPrefix.txt" );
+        File file = new File( actualOntologyDir + "OntologyUrl.txt" );
         FileInputStream fis = null;
         try {
             fis = new FileInputStream( file );
@@ -79,5 +78,11 @@ public class TermsInEfoSparqlQuery<OntologyPrefix> implements CommandLineRunner 
 
         logger.info( "Number of prefixes in the given file are " + count );
     }
-
 }
+
+
+
+
+
+
+

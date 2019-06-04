@@ -78,22 +78,8 @@ public class QueryWriter implements CommandLineRunner {
 
         String efoOwl = scatlasFolder +"/efo-edit.owl";
 
-      /*
-        String efoOwl = scatlasFolder +"/efo-edit.owl";
-        String command1 ="curl https://raw.githubusercontent.com/EBISPOT/efo/efo2/src/ontology/efo-edit.owl";
         try {
-            Process process = Runtime.getRuntime().exec(command1);
-            process.getInputStream();
-            process.destroy();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
-        //utilityService.executeCommand("curl https://raw.githubusercontent.com/EBISPOT/efo/efo2/src/ontology/efo-edit.owl > "+efoOwl);
-
-        try {
-            Files.createDirectories( Paths.get(scatlasFolder +"/results/"));
+            Files.createDirectories( Paths.get(scatlasFolder +"/RESULTS/"));
         }catch (Exception e){}
 
         /**
