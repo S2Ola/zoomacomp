@@ -28,53 +28,50 @@ public class ZoomaETL implements CommandLineRunner {
     @Autowired
     private UtilityService utilityService;
 
-/****************************************************************
-*
-*****************************************************************/
-    public void loadDataFile() {
+
+    public void loadDataFile(){
 
         String fileName = "/Users/dipo/desktop/SingleCellAtlasData/atlas_zooma.tsv";
 
 
-        Map <String, List <String>> data = utilityService.serializeMergedData( fileName, "SEMANTIC_TAG" );
+        Map<String, List<String>> data = utilityService.serializeMergedData( fileName, "SEMANTIC_TAG");
 
 
         String mapKey = "";
         String prefixes = "";
         String destination = "/Documents/SCATLAS_FOLDER/ACTUAL_ONTOLOGY/";
 
-        for (Map.Entry <String, List <String>> entry : data.entrySet()) {
+        for (Map.Entry<String, List<String>> entry : data.entrySet()) {
 
             mapKey = entry.getKey();
 
             logger.info( mapKey );
 
 
-            String[] temp = mapKey.split( "/" );
-            String fileData = temp[temp.length - 1];
+            String[] temp = mapKey.split("/");
+            String fileData = temp[temp.length-1];
 
-            List <String> dData = data.get( mapKey );
+            List<String> dData = data.get( mapKey );
 
             String report = "";
-            for (String iri : dData) {
+            for (String iri : dData){
 
 
-                if (iri.contains( "|" )) {
-                    iri = String.join( "\n", iri.split( "\\|" ) );
+                if (iri.contains("|")){
+                    iri = String.join( "\n", iri.split("\\|"));
                 }
 
-                report += iri + "\n";
+                 report += iri+"\n";
             }
 
 
-            prefixes += mapKey + ",";
+            prefixes += mapKey+",";
 
-            utilityService.writeToFile( report, destination, fileData + ".txt" );
+            utilityService.writeToFile( report, destination, fileData+".txt" );
         }
 
-        utilityService.writeToFile( prefixes, destination, "OntologyUrl.txt" );
+        utilityService.writeToFile( prefixes, destination,"OntologyUrl.txt" );
 
     }
 
 }
-

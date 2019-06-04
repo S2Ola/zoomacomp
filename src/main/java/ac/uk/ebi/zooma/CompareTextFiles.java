@@ -8,14 +8,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -45,6 +43,7 @@ public class CompareTextFiles implements CommandLineRunner {
         loadPrefixFile();
     }
 
+
     public void loadPrefixFile() throws Exception {
 
         String ontologyUrl = utilityService.parseFile( actualOntologyDir + "OntologyUrl.txt" );
@@ -61,81 +60,38 @@ public class CompareTextFiles implements CommandLineRunner {
         for (String url : urls) {
             String[] temp = url.split( "/" );
             String prefix = temp[temp.length - 1];
-            uniqueData( prefix );
-            compareFiles( prefix );
+
+            uniqueFileContents(prefix);
+
+           compareFiles( prefix );
 
             logger.info( "This is the Ontology prefix: " + prefix );
 
         }
     }
-        private void uniqueData (String prefix) {
-        Path input = Paths.get(actualOntologyDir +prefix+".txt");
-        Path output = Paths.get(compareDir +prefix+"_2.txt");
 
-        try {
-            List<String> words = getDistinctSortedWords(input);
-            Files.write(output, words, UTF_8);
-        } catch (IOException e) {
+    public void uniqueFileContents (String prefix){
 
-        }
-    }
+            Path input = Paths.get(compareDir + prefix+"_2.txt" );
+            Path output = Paths.get(compareDir + prefix+"_3.txt" );
 
-    private static List<String> getDistinctSortedWords(Path path) throws IOException {
-        try(Stream<String> lines = Files.lines(path, UTF_8)) {
-            return lines.map(String::trim)
-                    .filter(s -> !s.isEmpty()) // If keyword is not empty, collect it.
-                    .distinct()
-                    .sorted()
-                    .collect(toList());
-        }
-    }
-    public void compareFiles( String prefix) throws Exception{
-
-        String second = actualOntologyDir +prefix+".txt";
-        String first = compareDir +prefix+"_2.txt" ;
-        BufferedReader fBr = new BufferedReader(new FileReader(second));
-        BufferedReader sBr = new BufferedReader(new FileReader(first));
-
-        ArrayList<String> strings = new ArrayList<>();
-
-        while ((second = fBr.readLine()) != null) {
-            strings.add(first);
-        }
-        fBr.close();
-
-        while ((first = sBr.readLine()) != null) {
-            if (strings.contains(first)) {
-                System.out.println(second);
+            try {
+                List<String> words = getDistinctSortedWords(input);
+                Files.write(output, words, UTF_8);
+            } catch (IOException e) {
+                //log error and/or warn user
             }
         }
-        sBr.close();
-    }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
+        public static List<String> getDistinctSortedWords(Path path) throws IOException {
+            try(Stream<String> lines = Files.lines(path, UTF_8)) {
+                return lines.map(String::trim)
+                        .filter(s -> !s.isEmpty()) // If keyword is not empty, collect it.
+                        .distinct()
+                        .sorted()
+                        .collect(toList());
+            }
+        }
 
      public void compareFiles (String prefix) throws Exception {
 
@@ -157,10 +113,10 @@ public class CompareTextFiles implements CommandLineRunner {
          }
 
 
-         br2 = new BufferedReader( new FileReader( new File( actualOntologyDir + prefix + ".txt" ) ) );
+         br1 = new BufferedReader( new FileReader( new File( actualOntologyDir + prefix + ".txt" ) ) );
          // br1 = new BufferedReader( new FileReader( new File (actualOntologyDir+ "BTO.txt")) );
          // br2 = new BufferedReader( new FileReader( new File( compareDir+"BTO_2.txt" ) ) );
-         br1 = new BufferedReader( new FileReader( new File( compareDir + prefix + "_2.txt" ) ) );
+         br2 = new BufferedReader( new FileReader( new File( compareDir + prefix + "_3.txt" ) ) );
 
          while ((sCurrentLine = br1.readLine()) != null) {
              if (expectedrecords.containsKey( sCurrentLine )) {
@@ -187,30 +143,27 @@ public class CompareTextFiles implements CommandLineRunner {
          }
 
 
-         *//*bw3 = new BufferedWriter( new FileWriter( new File( outCompareDir + prefix + "_comp_in.txt" ) ) );
-         bw3.write( "Records which are in" + prefix + "but not present in EFO\n" );
+         bw3 = new BufferedWriter( new FileWriter( new File( outCompareDir + prefix + "_comp_in.txt" ) ) );
+         bw3.write( "Records which are in " + prefix + " but not present in EFO\n" );
          for (String key : expectedrecords.keySet()) {
              for (int i = 0; i < expectedrecords.get( key ); i++) {
                  bw3.write( key );
                  bw3.newLine();
              }
-         }*//*
-
-
-         bw3 = new BufferedWriter( new FileWriter( new File( outCompareDir + prefix + "_comp_in.txt" ) ) );
-         bw3.write( "Records which are not present in EFO\n" );
+         }
+        /*bw3.write( "Records which are not present in EFO\n" );
          for (String key : actualrecords.keySet()) {
              for (int i = 0; i < actualrecords.get( key ); i++) {
                  bw3.write( key );
                  bw3.newLine();
              }
-         }
+         }*/
          bw3.flush();
          bw3.close();
 
 
      }
-}*/
+}
 
 
 
