@@ -144,7 +144,7 @@ public class CompareTextFiles implements CommandLineRunner {
 
 
          bw3 = new BufferedWriter( new FileWriter( new File( outCompareDir + prefix + "_comp_in.txt" ) ) );
-         bw3.write( "Records which are in " + prefix + " but not present in EFO\n" );
+         bw3.write( "terms" );
          for (String key : expectedrecords.keySet()) {
              for (int i = 0; i < expectedrecords.get( key ); i++) {
                  bw3.write( key );

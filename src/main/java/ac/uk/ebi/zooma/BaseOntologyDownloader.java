@@ -20,8 +20,11 @@ public class BaseOntologyDownloader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
        loadOntology();
-       //loadPrefixfile();
+
     }
+
+
+
 
     public static void loadOntology()  {
         URL url;
