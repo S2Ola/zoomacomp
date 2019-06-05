@@ -17,6 +17,9 @@ public class ZoomaETL implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger( ZoomaETL.class );
     private String homeDir = System.getProperty( "user.home" );
+    private String inputFolder = homeDir+"/Documents/INPUTS/";
+    private String scatlasFolder = homeDir+"/Documents/SCATLAS_FOLDER";
+    private String actualOntologyDir = scatlasFolder +"/ACTUAL_ONTOLOGY/";
 
     @Override
     public void run(String... args) {
@@ -31,7 +34,8 @@ public class ZoomaETL implements CommandLineRunner {
 
     public void loadDataFile(){
 
-        String fileName = "/Users/dipo/desktop/SingleCellAtlasData/atlas_zooma.tsv";
+        String fileName = inputFolder+"atlas_zooma.tsv"; // specify the input file path in csv,tsv or txt format
+        //A folder is created on the documents folder called INPUTS
 
 
         Map<String, List<String>> data = utilityService.serializeMergedData( fileName, "SEMANTIC_TAG");

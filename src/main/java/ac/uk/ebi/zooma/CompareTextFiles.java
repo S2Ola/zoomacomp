@@ -63,7 +63,7 @@ public class CompareTextFiles implements CommandLineRunner {
 
             uniqueFileContents(prefix);
 
-           compareFiles( prefix );
+            compareFiles( prefix );
 
             logger.info( "This is the Ontology prefix: " + prefix );
 

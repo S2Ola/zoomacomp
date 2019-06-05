@@ -1,17 +1,7 @@
 package ac.uk.ebi.zooma;
 
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+/*
 @Component
 @Order(value = -1)
 public class BaseOntologyDownloader implements CommandLineRunner {
@@ -56,4 +46,4 @@ public class BaseOntologyDownloader implements CommandLineRunner {
 
 
 
-}
+}*/

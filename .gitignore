@@ -27,3 +27,8 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+### Initial Files ##
+/ACTUAL_ONTOLOGY/*.*
+/SPRQL/*.*
+*.txt
