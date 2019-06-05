@@ -72,8 +72,8 @@ public class CompareTextFiles implements CommandLineRunner {
 
     public void uniqueFileContents (String prefix){
 
-            Path input = Paths.get(compareDir + prefix+"_2.txt" );
-            Path output = Paths.get(compareDir + prefix+"_3.txt" );
+            Path input = Paths.get(actualOntologyDir + prefix+".txt" );
+            Path output = Paths.get(actualOntologyDir + prefix+"_3.txt" );
 
             try {
                 List<String> words = getDistinctSortedWords(input);
@@ -113,10 +113,10 @@ public class CompareTextFiles implements CommandLineRunner {
          }
 
 
-         br1 = new BufferedReader( new FileReader( new File( actualOntologyDir + prefix + ".txt" ) ) );
+         br1 = new BufferedReader( new FileReader( new File( actualOntologyDir + prefix+"_3.txt" ) ) );
          // br1 = new BufferedReader( new FileReader( new File (actualOntologyDir+ "BTO.txt")) );
          // br2 = new BufferedReader( new FileReader( new File( compareDir+"BTO_2.txt" ) ) );
-         br2 = new BufferedReader( new FileReader( new File( compareDir + prefix + "_3.txt" ) ) );
+         br2 = new BufferedReader( new FileReader( new File( compareDir + prefix + "_2.txt" ) ) );
 
          while ((sCurrentLine = br1.readLine()) != null) {
              if (expectedrecords.containsKey( sCurrentLine )) {
